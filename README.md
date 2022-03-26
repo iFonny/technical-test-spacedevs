@@ -1,5 +1,9 @@
 # technical-test-spacedevs
 
+Webapp that displays all orbital launches of a birthdate using [The Space Devs API](https://thespacedevs.com/llapi).
+
+![screenshot](https://github.com/iFonny/technical-test-spacedevs/blob/master/.assets/screenshot.png)
+
 ### Running the development server.
 
 ```bash

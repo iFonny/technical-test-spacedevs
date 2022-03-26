@@ -2,17 +2,17 @@ import { IconButton } from '@chakra-ui/button';
 import { StarIcon } from '@chakra-ui/icons';
 import { Box, Center, Container, Flex, Heading, Spacer, Text } from '@chakra-ui/layout';
 import { StatGroup, Stat, StatLabel, StatNumber, Badge, useColorModeValue, Tooltip, Image } from '@chakra-ui/react';
+import { useFavorites } from '@hooks/useFavorites';
 import { Launch } from 'api/launches';
 import { getStatusColor } from 'api/launches/utils';
 import { format, parseISO } from 'date-fns';
-import { useState } from 'react';
 
 interface Props {
   launchData: Launch;
 }
 
 export function LaunchDetails({ launchData }: Props) {
-  const [isFavorite, setIsFavorite] = useState(false); // TODO: use localStorage
+  const { toggleFavorite, isFavorite } = useFavorites(launchData.id);
 
   return (
     <Container maxWidth="2xl" centerContent>
@@ -35,7 +35,7 @@ export function LaunchDetails({ launchData }: Props) {
             aria-label="fav"
             icon={<StarIcon />}
             variant={isFavorite ? 'solid' : 'outline'}
-            onClick={() => setIsFavorite(!isFavorite)}
+            onClick={() => toggleFavorite(launchData)}
           />
         </Flex>
 

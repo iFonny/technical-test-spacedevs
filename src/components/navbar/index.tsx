@@ -16,7 +16,6 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { Logo } from '../../components-ui/logo';
 import ThemeToggler from '@components-ui/theme-toggler';
 
 interface NavItem {

@@ -17,15 +17,18 @@ export interface LaunchStatus {
   description: string;
 }
 
-export interface Launch {
+export interface SmallLaunch {
   id: string;
-  url: string;
-  slug: string;
   name: string;
   image?: string;
   net: string;
   status: LaunchStatus;
   mission?: LaunchMission;
+}
+
+export interface Launch extends SmallLaunch {
+  url: string;
+  slug: string;
   launch_service_provider?: {
     id: number;
     name: string;

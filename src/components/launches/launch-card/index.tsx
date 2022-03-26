@@ -1,6 +1,6 @@
 import { IconButton } from '@chakra-ui/button';
 import { StarIcon } from '@chakra-ui/icons';
-import { Box, Flex, Heading, Spacer, Text } from '@chakra-ui/layout';
+import { Box, Flex, Heading, Spacer } from '@chakra-ui/layout';
 import {
   StatGroup,
   Stat,
@@ -12,27 +12,28 @@ import {
   Image,
   useMediaQuery,
 } from '@chakra-ui/react';
-import { Launch } from 'api/launches';
+import { SmallLaunch } from 'api/launches';
 import { format, parseISO } from 'date-fns';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler } from 'react';
 import NextLink from 'next/link';
 import routes from 'src/constants/routes';
 import { getStatusColor } from 'api/launches/utils';
+import { useFavorites } from '@hooks/useFavorites';
 
 const FALLBACK_IMAGE =
   'https://img.freepik.com/free-vector/rocket-sketch-drawing-with-free-hand-vector-eps10_255544-1983.jpg';
 
 interface Props {
-  launchData: Launch;
+  launchData: SmallLaunch;
 }
 
 export function LaunchCard({ launchData }: Props) {
   const [isMobile] = useMediaQuery('(max-width: 768px)');
-  const [isFavorite, setIsFavorite] = useState(false); // TODO: use localStorage
+  const { toggleFavorite, isFavorite } = useFavorites(launchData.id);
 
   const handleFavoriteClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
-    setIsFavorite(!isFavorite);
+    toggleFavorite(launchData);
   };
 
   return (
@@ -63,7 +64,6 @@ export function LaunchCard({ launchData }: Props) {
                 <Heading size="sm" textTransform="capitalize" textAlign="left">
                   {launchData.name}
                 </Heading>
-                <Text textAlign="left">{launchData.launch_service_provider.name}</Text>
               </Box>
 
               <Spacer />
