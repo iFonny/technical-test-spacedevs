@@ -2,6 +2,12 @@ React application that asks the user his date of birth, then displays all the or
 
 ![screenshot](https://github.com/iFonny/technical-test-spacedevs/blob/master/.assets/screenshot.png)
 
+### Install.
+
+```bash
+    yarn install
+```
+
 ### Running the development server.
 
 ```bash
