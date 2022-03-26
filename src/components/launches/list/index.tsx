@@ -1,26 +1,29 @@
 import { Box, Text } from '@chakra-ui/layout';
-import { Button } from '@chakra-ui/react';
 import { LaunchCard } from '@components/launches/launch-card';
 import { useAppSelector } from '@redux/store';
-import { Launches } from 'src/api/launches';
+import { Launches } from 'api/launches';
 import { isEmpty } from 'lodash';
+import { InfiniteData } from 'react-query';
 
 interface Props {
-  launchesData: Launches;
-  isLoading: boolean;
+  data: InfiniteData<Launches>;
 }
 
-export const LaunchesList = ({ launchesData, isLoading }: Props) => {
-  const birthDate = useAppSelector((state) => state.filters.birthdate);
+export const LaunchesList = ({ data }: Props) => {
+  const birthdate = useAppSelector((state) => state.filters.birthdate);
 
-  if (!birthDate) return <Text>Please enter your birthdate</Text>;
-  if (isEmpty(launchesData.results)) return <Text>No launches found</Text>;
+  if (!birthdate) return <Text>Please enter your birthdate</Text>;
+  if (isEmpty(data.pages) || data.pages[0]?.count === 0) return <Text>No launches found</Text>;
 
-  const cards = launchesData.results.map((launch) => <LaunchCard key={launch.id} launchData={launch} />);
   return (
-    <Box>
-      {cards}
-      {launchesData.next && <Button m={4}>Show more</Button>}
-    </Box>
+    <>
+      {data.pages.map((launchesData, i) => (
+        <Box mb={4} key={i}>
+          {launchesData.results.map((launch) => (
+            <LaunchCard key={launch.id} launchData={launch} />
+          ))}
+        </Box>
+      ))}
+    </>
   );
 };

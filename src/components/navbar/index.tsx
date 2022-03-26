@@ -55,9 +55,7 @@ export const NavBar = () => {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} align="center">
-          <Logo />
-
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+          <Flex display={{ base: 'none', md: 'flex' }} ml={2}>
             <DesktopNav navigationItems={NAV_ITEMS} />
           </Flex>
         </Flex>

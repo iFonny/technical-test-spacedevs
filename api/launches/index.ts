@@ -1,5 +1,4 @@
-import api from 'src/api';
-import { IFiltersState } from '@redux/slices/filters';
+import api from 'api';
 
 // -------- Types
 
@@ -57,6 +56,9 @@ export const getLaunchById = async (launchId: string): Promise<Launch> => {
   return await api.get(`launch/${launchId}`).then((response) => response?.data);
 };
 
-export const getLaunches = async (params: LaunchesRequestFilters): Promise<Launches> => {
-  return await api.get(`launch`, { params }).then((response) => response?.data);
+export const getLaunches = async (params?: LaunchesRequestFilters, next?: string): Promise<Launches> => {
+  if (params) {
+    if (next) return await api.get(next).then((response) => response?.data);
+    return await api.get(`launch`, { params }).then((response) => response?.data);
+  }
 };

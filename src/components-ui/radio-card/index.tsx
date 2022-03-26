@@ -14,7 +14,7 @@ export const RadioCard = (props: RadioCardProps) => {
 
   return (
     <Button
-      size="md"
+      size="xs"
       leftIcon={props.icon}
       as="label"
       cursor="pointer"

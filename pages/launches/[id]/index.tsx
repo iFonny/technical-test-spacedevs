@@ -1,5 +1,5 @@
 import { Alert, AlertDescription, AlertIcon, Box, Heading, Spinner } from '@chakra-ui/react';
-import { useGetLaunch } from 'src/api/launches/hooks';
+import { useGetLaunch } from 'api/launches/hooks';
 import { GetServerSideProps } from 'next';
 import { LaunchDetails } from '@components/launches/launch-details';
 

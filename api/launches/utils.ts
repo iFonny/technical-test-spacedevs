@@ -1,5 +1,5 @@
 import { IFiltersState } from '@redux/slices/filters';
-import { LaunchesRequestFilters } from 'src/api/launches';
+import { LaunchesRequestFilters } from 'api/launches';
 import {
   endOfDay,
   endOfMonth,
@@ -25,12 +25,12 @@ export function getPeriodIntervalFilter(birthDate: Date, period: IFiltersState['
   }
 }
 
-export function getRequestFilters(filters: IFiltersState): LaunchesRequestFilters {
-  let reqFilters: LaunchesRequestFilters = {};
-
+export function getRequestFilters(filters: IFiltersState): LaunchesRequestFilters | undefined {
   if (filters.birthdate) {
+    let reqFilters: LaunchesRequestFilters = {};
+
     // -- Search --
-    if (!isEmpty(reqFilters.search)) reqFilters.search = filters.search;
+    if (!isEmpty(filters.search)) reqFilters.search = filters.search;
 
     // -- Order by --
     reqFilters.ordering = filters.ordering;
@@ -50,7 +50,19 @@ export function getRequestFilters(filters: IFiltersState): LaunchesRequestFilter
         reqFilters = { ...reqFilters, ...getPeriodIntervalFilter(filters.birthdate, 'year') };
         break;
     }
-  }
 
-  return reqFilters;
+    return reqFilters;
+  } else return undefined;
 }
+
+export const getStatusColor = (status: string) => {
+  switch (status.toLowerCase()) {
+    case 'success':
+      return 'green';
+    case 'failure':
+    case 'partial failure':
+      return 'red';
+    default:
+      return;
+  }
+};

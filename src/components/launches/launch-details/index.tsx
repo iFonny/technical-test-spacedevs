@@ -2,7 +2,8 @@ import { IconButton } from '@chakra-ui/button';
 import { StarIcon } from '@chakra-ui/icons';
 import { Box, Center, Container, Flex, Heading, Spacer, Text } from '@chakra-ui/layout';
 import { StatGroup, Stat, StatLabel, StatNumber, Badge, useColorModeValue, Tooltip, Image } from '@chakra-ui/react';
-import { Launch } from 'src/api/launches';
+import { Launch } from 'api/launches';
+import { getStatusColor } from 'api/launches/utils';
 import { format, parseISO } from 'date-fns';
 import { useState } from 'react';
 
@@ -77,7 +78,7 @@ export function LaunchDetails({ launchData }: Props) {
             <StatLabel>Status</StatLabel>
             <StatNumber>
               <Tooltip hasArrow label={launchData.status.description}>
-                <Badge fontSize="0.7em" colorScheme={launchData.status.abbrev === 'Success' ? 'green' : 'red'}>
+                <Badge fontSize="0.7em" colorScheme={getStatusColor(launchData.status.abbrev)}>
                   {launchData.status.abbrev}
                 </Badge>
               </Tooltip>

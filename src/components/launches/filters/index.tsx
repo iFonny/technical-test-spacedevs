@@ -1,14 +1,15 @@
 import { Search2Icon } from '@chakra-ui/icons';
-import { Box } from '@chakra-ui/layout';
+import { Box, VStack } from '@chakra-ui/layout';
 import {
   ButtonGroup,
   Input,
   InputGroup,
   InputLeftElement,
-  Stack,
+  InputRightElement,
   Tab,
   TabList,
   Tabs,
+  useMediaQuery,
   useRadioGroup,
 } from '@chakra-ui/react';
 import { RadioCard } from '@components-ui/radio-card';
@@ -62,7 +63,7 @@ const LaunchesOrderByFilter = () => {
   );
 };
 
-const LaunchesSearchFilter = () => {
+const LaunchesSearchFilter = ({ hasOrderBy = false }: { hasOrderBy?: boolean }) => {
   const dispatch = useAppDispatch();
   const search = useAppSelector((state) => state.filters.search);
   const [searchField, setSearchField] = useState(search);
@@ -79,19 +80,35 @@ const LaunchesSearchFilter = () => {
       <InputLeftElement pointerEvents="none">
         <Search2Icon color="gray.300" />
       </InputLeftElement>
-      <Input value={searchField || ''} onChange={(e) => handleChangeSearch(e.target.value)} placeholder="Search" />
+      <Input
+        pr={hasOrderBy ? 350 : '1rem'}
+        value={searchField || ''}
+        onChange={(e) => handleChangeSearch(e.target.value)}
+        placeholder="Search"
+      />
+      {hasOrderBy && (
+        <InputRightElement mr="2" width="auto">
+          <LaunchesOrderByFilter />
+        </InputRightElement>
+      )}
     </InputGroup>
   );
 };
 
 export const LaunchesFilters = () => {
+  const [isMobile] = useMediaQuery('(max-width: 768px)');
+
   return (
     <Box mb={4}>
       <LaunchesPeriodFilter />
-      <Stack direction={['column', 'column', 'row']} alignItems="center" spacing={4}>
-        <LaunchesSearchFilter />
-        <LaunchesOrderByFilter />
-      </Stack>
+      {isMobile ? (
+        <VStack spacing={4}>
+          <LaunchesSearchFilter />
+          <LaunchesOrderByFilter />
+        </VStack>
+      ) : (
+        <LaunchesSearchFilter hasOrderBy />
+      )}
     </Box>
   );
 };

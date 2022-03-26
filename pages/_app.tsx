@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactElement, ReactNode } from 'react';
 import { AppProps } from 'next/app';
 import { ChakraProvider, useToast } from '@chakra-ui/react';

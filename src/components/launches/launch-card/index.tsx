@@ -12,11 +12,12 @@ import {
   Image,
   useMediaQuery,
 } from '@chakra-ui/react';
-import { Launch } from 'src/api/launches';
+import { Launch } from 'api/launches';
 import { format, parseISO } from 'date-fns';
 import { MouseEventHandler, useState } from 'react';
 import NextLink from 'next/link';
 import routes from 'src/constants/routes';
+import { getStatusColor } from 'api/launches/utils';
 
 const FALLBACK_IMAGE =
   'https://img.freepik.com/free-vector/rocket-sketch-drawing-with-free-hand-vector-eps10_255544-1983.jpg';
@@ -104,7 +105,7 @@ export function LaunchCard({ launchData }: Props) {
                 <StatLabel>Status</StatLabel>
                 <StatNumber>
                   <Tooltip hasArrow label={launchData.status.description}>
-                    <Badge fontSize="0.7em" colorScheme={launchData.status.abbrev === 'Success' ? 'green' : 'red'}>
+                    <Badge fontSize="0.7em" colorScheme={getStatusColor(launchData.status.abbrev)}>
                       {launchData.status.abbrev}
                     </Badge>
                   </Tooltip>

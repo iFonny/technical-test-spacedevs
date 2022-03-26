@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LaunchesRequestFilters } from 'src/api/launches';
+import { LaunchesRequestFilters } from 'api/launches';
 
 export interface IFiltersState {
   birthdate?: Date;

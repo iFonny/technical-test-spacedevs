@@ -1,4 +1,4 @@
-import { Box, Button, InputGroup, InputRightElement, Heading, InputLeftElement, Container } from '@chakra-ui/react';
+import { Button, InputGroup, InputRightElement, InputLeftElement } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 
 import { ArrowForwardIcon, CalendarIcon, CloseIcon } from '@chakra-ui/icons';
