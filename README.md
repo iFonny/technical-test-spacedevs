@@ -1,32 +1,34 @@
+# Technical test
+
 React application that asks the user his date of birth, then displays all the orbital launches of his year/month/week/day of birth using [The Space Devs API](https://thespacedevs.com/llapi).
 
 ![screenshot](https://github.com/iFonny/technical-test-spacedevs/blob/master/.assets/screenshot.png)
 
-### Install.
+### Install dependencies
 
 ```bash
     yarn install
 ```
 
-### Running the development server.
+### Running the development server
 
 ```bash
     yarn dev
 ```
 
-### Building for production.
+### Building for production
 
 ```bash
     yarn build
 ```
 
-### Running the production server.
+### Running the production server
 
 ```bash
     yarn start
 ```
 
-### Linting & formatting your code.
+### Linting & formatting your code
 
 ```bash
     yarn lint
